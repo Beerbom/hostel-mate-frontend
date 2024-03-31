@@ -7,6 +7,7 @@ import AttendancePage from './components/Attendance'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
+
 axios.defaults.baseURL='http://localhost:5000';
 axios.defaults.withCredentials=true
 function App() {
