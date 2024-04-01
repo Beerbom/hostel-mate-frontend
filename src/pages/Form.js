@@ -85,6 +85,7 @@ function Form() {
 
   return (
     <div>
+
       <div className='d-flex justify-content-center '>
         <div className='py-8 px-4 shadow rounded-lg px-10 w-100 mt-10 rounded' style={{ backgroundColor: "#2E2E2E", maxWidth: "748px", marginTop: "50px" }}>
           <h2 className='mt-3 text-white mb-3'>{title[page]}</h2>
