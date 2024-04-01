@@ -105,16 +105,6 @@ const CardComponent = () => {
           alert('Error storing student details:', error);
           alert('Error allocating room:', error);
         });
-    //     axios.post('/allocate-room', { studentId })
-    //   .then(response => {
-    //     alert(`Room allocated successfully. Room No: ${response.data.roomNo}`);
-    //     // You may want to update the UI to reflect the allotted room for the student
-    //     // For example, update the state to mark the student as allotted
-    //     moveStudentToAllotted(studentId);
-    //   })
-    //   .catch(error => {
-    //     alert('Error allocating room:', error);
-    //   });
     }
   };
 

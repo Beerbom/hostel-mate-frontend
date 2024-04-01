@@ -43,27 +43,44 @@ const AttendancePage = () => {
   };
 
   return (
-    <div>
-      <h1>Attendance Page</h1>
-      <label>Select Date:</label>
-      <input type="date" value={selectedDate} onChange={(e) => handleDateChange(e.target.value)} />
+    <div className="container">
+      <h1 className="text-center mt-4">Attendance Page</h1>
+      <label className="d-block text-center">Select Date:</label>
+      <input className="form-control mx-auto" type="date" value={selectedDate} onChange={(e) => handleDateChange(e.target.value)} style={{ cursor: 'pointer' }}/>
 
-      <h2>Students:</h2>
-      {students.map(student => (
-        <div key={student._id}>
-          <span>{student.Name}</span>
-          <label>
-            Present
-            <input
-              type="checkbox"
-              onChange={(e) => handleAttendanceChange(student._id, e.target.checked)}
-              checked={attendanceData[student._id]?.present || false}
-            />
-          </label>
-        </div> 
-      ))}
+      <h2 className="text-center mt-4">Students:</h2>
+      <table className="table table-bordered table-striped table-lg mx-auto" style={{ width: '80%' }}>
+        <thead>
+          <tr>
+            <th className="text-center">Serial No</th>
+            <th className="text-center">Room No</th>
+            <th className="text-center">Name</th>
+            <th className="text-center">Present</th>
+          </tr>
+        </thead>
+        <tbody>
+          {students.map((student, index) => (
+            <tr key={student._id}>
+              <td className="text-center">{index + 1}</td>
+              <td className="text-center">{student.Room_No}</td>
+              <td>{student.Name}</td>
+              <td className="text-center">
+                <label>
+                  <input
+                    type="checkbox"
+                    onChange={(e) => handleAttendanceChange(student._id, e.target.checked)}
+                    checked={attendanceData[student._id]?.present || false}
+                  />
+                </label>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
 
-      <button onClick={handleSubmit}>Submit Attendance</button>
+      <div className="text-center">
+        <button className="btn btn-primary" onClick={handleSubmit}>Submit Attendance</button>
+      </div>
     </div>
   );
 };
