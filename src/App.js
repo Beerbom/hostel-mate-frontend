@@ -7,6 +7,7 @@ import AttendancePage from './components/Attendance'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import UserView from './components/UserView';
 import MessDuty from './components/MessDuty';
+import Attendance from './components/Show';
 
 
 
@@ -23,6 +24,7 @@ function App() {
           <Route path="/attendance" element={<AttendancePage/>  } />
           <Route path="/userview" element={<UserView/>  } />
           <Route path="/messduty" element={<MessDuty/>  } />
+          <Route path="/view" element={<Attendance/>  } />
         </Routes>
       </Router>
 
