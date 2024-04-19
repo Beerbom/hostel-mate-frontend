@@ -7,13 +7,13 @@ function MessDuty() {
 
   useEffect(() => {
     fetchMessDutyData();
-  }, []); // Fetch mess duty data on component mount
+  }, []);
 
   const handleAllocateMessDuty = () => {
-    axios.post('/allocate-mess-duty') // Update the URL with your backend URL
+    axios.post('/allocate-mess-duty')
       .then(response => {
         setAllocationMessage(response.data.message);
-        fetchMessDutyData(); // Fetch mess duty data after allocation
+        fetchMessDutyData();
       })
       .catch(error => {
         console.error('Error allocating mess duty:', error);
@@ -22,8 +22,7 @@ function MessDuty() {
   };
 
   const fetchMessDutyData = () => {
-    // Fetch mess duty data from backend
-    axios.get('/mess-duty') // Update the URL with your backend URL
+    axios.get('/mess-duty')
       .then(response => {
         setMessDutyData(response.data);
       })
@@ -32,28 +31,40 @@ function MessDuty() {
       });
   };
 
+  const handleDeleteAllMessDuty = () => {
+    axios.delete('/delete-all-mess-duty')
+      .then(response => {
+        console.log(response.data.message);
+        fetchMessDutyData(); // Refresh the mess duty data after deletion
+      })
+      .catch(error => {
+        console.error('Error deleting all mess duty data:', error);
+      });
+  };
+
   return (
     <div>
       <h2>Mess Duty Allocation</h2>
-      <button onClick={handleAllocateMessDuty}>Allocate Mess Duty</button>
+      <button className='btn btn-primary' onClick={handleAllocateMessDuty}>Allocate Mess Duty</button>
+      <button className='btn btn-danger' onClick={handleDeleteAllMessDuty}>Delete All Mess Duty Data</button>
       <p>{allocationMessage}</p>
       <h3>Mess Duty Table</h3>
-      <table>
+      <table className="table table-bordered table-striped table-lg mx-auto" style={{ width: '80%' }}>
         <thead>
           <tr>
-            <th>Room No</th>
-            <th>Student Name</th>
-            <th>From Date</th>
-            <th>To Date</th>
+            <th className="text-center">Room No</th>
+            <th className="text-center">Student Name</th>
+            <th className="text-center">From Date</th>
+            <th className="text-center">To Date</th>
           </tr>
         </thead>
         <tbody>
           {messDutyData.map((item, index) => (
             <tr key={index}>
-              <td>{item.roomNo}</td>
-              <td>{item.studentName}</td>
-              <td>{item.fromDate}</td>
-              <td>{item.toDate}</td>
+              <td className="text-center">{item.roomNo}</td>
+              <td className="text-center">{item.studentName}</td>
+              <td className="text-center">{item.fromDate}</td>
+              <td className="text-center">{item.toDate}</td>
             </tr>
           ))}
         </tbody>

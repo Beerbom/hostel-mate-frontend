@@ -35,10 +35,11 @@ function UserView() {
                 <p className="card-text">Admission No: {detail.AdmNo}</p>
                 <p className="card-text">Room No: {detail.Room_No}</p>
                 {showDetailsIndex === index && (
-                  <div>
-                    {/* Render additional details here */}
+                  <div className=''>
+                   
                     <p className="card-text">Phone No: {detail.PhoneNo}</p>
-                    {/* Add other fields as needed */}
+                    <p className="card-text ">Phone No: {detail.Branch}</p>
+                    
                   </div>
                 )}
                 <button className='btn btn-primary' onClick={() => toggleDetails(index)}>
