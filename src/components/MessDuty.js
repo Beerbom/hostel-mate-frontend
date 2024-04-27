@@ -4,12 +4,19 @@ import axios from 'axios';
 function MessDuty() {
   const [allocationMessage, setAllocationMessage] = useState('');
   const [messDutyData, setMessDutyData] = useState([]);
+  const [lastClickedDate, setLastClickedDate] = useState(null);
 
   useEffect(() => {
     fetchMessDutyData();
   }, []);
 
   const handleAllocateMessDuty = () => {
+    if (lastClickedDate && isSameDay(new Date(), lastClickedDate)) {
+      setAllocationMessage('Button disabled for today.');
+      return;
+    }
+
+    setLastClickedDate(new Date());
     axios.post('/allocate-mess-duty')
       .then(response => {
         setAllocationMessage(response.data.message);
@@ -35,17 +42,27 @@ function MessDuty() {
     axios.delete('/delete-all-mess-duty')
       .then(response => {
         console.log(response.data.message);
-        fetchMessDutyData(); // Refresh the mess duty data after deletion
+        fetchMessDutyData();
       })
       .catch(error => {
         console.error('Error deleting all mess duty data:', error);
       });
   };
 
+  const isSameDay = (date1, date2) => {
+    return (
+      date1.getFullYear() === date2.getFullYear() &&
+      date1.getMonth() === date2.getMonth() &&
+      date1.getDate() === date2.getDate()
+    );
+  };
+
   return (
     <div>
       <h2>Mess Duty Allocation</h2>
-      <button className='btn btn-primary' onClick={handleAllocateMessDuty}>Allocate Mess Duty</button>
+      <button className='btn btn-primary' onClick={handleAllocateMessDuty}>
+        Allocate Mess Duty
+      </button>
       <button className='btn btn-danger' onClick={handleDeleteAllMessDuty}>Delete All Mess Duty Data</button>
       <p>{allocationMessage}</p>
       <h3>Mess Duty Table</h3>
