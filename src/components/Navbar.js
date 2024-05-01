@@ -17,7 +17,7 @@ function Navbar() {
           <a class="nav-link" href="#"><Link to="/fetch">submit</Link></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"><Link to="/attendance">attdebce</Link></a>
+          <a class="nav-link" href="#"><Link to="/attendance">Attendance</Link></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#"><Link to="/userview">Userview</Link></a>

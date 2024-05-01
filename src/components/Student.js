@@ -1,31 +1,46 @@
 import React from 'react'
 
 function Student({data,setData}) {
+  const handleDegreeChange = (e) => {
+    setData({ ...data, Degree: e.target.value, YearOfStudy: '' });
+  };
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setData({ ...data, [name]: value.toUpperCase() }); 
+  };
   return (
     <div className='mb-6'>
-      <div class="form-group " style={{marginBottom:"20px"}}>
-        <input type="text" onChange={(e)=>setData({...data,Name:e.target.value})} value={data.Name}
-          class="form-control text-white " style={{backgroundColor:"#111111",height:"62px",width:"95%"}} id="exampleInputName" placeholder="Name of Student(All in CAPS)" />
-      </div>
+       <div className="form-group" style={{ marginBottom: "20px" }}>
+      <input
+        type="text"
+        name="Name"
+        onChange={handleInputChange}
+        value={data.Name}
+        className="form-control text-white"
+        style={{ backgroundColor: "#111111", height: "62px", width: "95%" }}
+        id="exampleInputName"
+        placeholder="Name of Student (All in CAPS)"
+      />
+    </div>
       <div class="form-group d-flex" style={{marginBottom:"20px"}}>
       <input type="text" readonly class="form-control " value="+91" style={{height:'62px',width:'10%',backgroundColor:'#3E3E3E',color:'#A59191'}}/>
         <input type="text"onChange={(e)=>setData({...data,PhoneNo:e.target.value})} value={data.PhoneNo}
          class="form-control" id="exampleInputContact" style={{marginLeft:'20px',backgroundColor:"#111111",height:"62px",width:"82%"}} placeholder="Contact Number" />
       </div>
-      <div class="form-group d-flex" style={{marginBottom:"20px"}}>
+      {/* <div class="form-group d-flex" style={{marginBottom:"20px"}}>
       <input type="text" readonly class="form-control " value="+91" style={{height:'62px',width:'10%',backgroundColor:'#3E3E3E',color:'#A59191'}}/>
         <input type="text" onChange={(e)=>setData({...data,EmergencyPhoneNo:e.target.value})} value={data.EmergencyPhoneNo}
          class="form-control" id="exampleInputEmergency" style={{marginLeft:'20px',backgroundColor:"#111111",height:"62px",width:"82%"}} placeholder="Emergency Contact Number" />
-      </div>
+      </div> */}
       
       <div className=' text-white rounded' style={{marginBottom:"30px",backgroundColor:"#111111",height:"62px",display:'flex',width:"95%",justifyContent:'space-evenly',alignItems:'center'}}>Gender
-        <div class="form-check form-check-inline" >
+        {/* <div class="form-check form-check-inline" >
 
           <input class="form-check-input" onChange={(e)=>setData({...data,Gender:e.target.value})} value="M" checked={data.Gender === "M"} type="radio" name="exampleRadios" id="exampleRadios1"   />
           <label class="form-check-label" for="exampleRadios1">
             M
           </label>
-        </div >
+        </div > */}
         <div class="form-check form-check-inline">
           <input class="form-check-input" onChange={(e)=>setData({...data,Gender:e.target.value})} value="F" checked={data.Gender === "F"} type="radio" name="exampleRadios" id="exampleRadios2"  />
           <label class="form-check-label" for="exampleRadios2">
@@ -69,12 +84,7 @@ function Student({data,setData}) {
             MCA
           </label>
         </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="exampleRadioss" onChange={(e)=>setData({...data,Degree:e.target.value})} value="phD" checked={data.Degree === "phD"} id="exampleRadios3"  />
-          <label class="form-check-label" for="exampleRadios5">
-            phD
-          </label>
-        </div>
+        
       </div>
 
       <div className=" flex-row" style={{ display: "flex",justifyContent:"space-between",marginBottom:'20px',width:"95%"}}>
@@ -82,10 +92,55 @@ function Student({data,setData}) {
           <input type="text" class="form-control" onChange={(e)=>setData({...data,AdmNo:e.target.value})} value={data.AdmNo}
            placeholder="Admission No" style={{backgroundColor:"#111111",height:"62px"}}/>
         </div>
-        <div class="col-4">
-          <input type="Number" class="form-control" onChange={(e)=>setData({...data,YearOfStudy:e.target.value})} value={data.YearOfStudy}
-           placeholder="Year of Study" style={{backgroundColor:"#111111",height:"62px"}} />
+      
+      {data.Degree === 'BTech' && (
+        <div className="col-4">
+          <select
+            className="form-control" 
+            onChange={(e) => setData({ ...data, YearOfStudy: e.target.value })}
+            value={data.YearOfStudy}
+            style={{ backgroundColor: "#111111", height: "62px" }}
+          >
+            <option value="">Select Year of Study</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
         </div>
+      )}
+      {data.Degree === 'BArch' && (
+        <div className="col-4">
+          <select
+            className="form-control"
+            onChange={(e) => setData({ ...data, YearOfStudy: e.target.value })}
+            value={data.YearOfStudy}
+            style={{ backgroundColor: "#111111", height: "62px" }}
+          >
+            <option value="">Select Year of Study</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+      )}
+      {(data.Degree === 'MTech' || data.Degree === 'MCA') && (
+        <div className="col-4">
+          <select
+            className="form-control"
+            onChange={(e) => setData({ ...data, YearOfStudy: e.target.value })}
+            value={data.YearOfStudy}
+            style={{ backgroundColor: "#111111", height: "62px" }}
+          >
+            <option value="">Select Year of Study</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+          </select>
+        </div>
+      )}
+
         <div class="col-2">
           <input type="text" class="form-control" onChange={(e)=>setData({...data,Branch:e.target.value})} value={data.Branch} 
           placeholder="Branch" style={{backgroundColor:"#111111",height:"62px"}} />
