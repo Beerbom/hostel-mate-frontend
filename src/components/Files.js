@@ -31,7 +31,7 @@ function Files({ data, setData }) {
         </div>
       </div>
       <div className='text-white' style={{ marginBottom: '20px' }}>
-        <h3>Income certificate (pdf maximum size 3 mb)</h3>
+        <h3>Income certificate <small style={{ fontSize: "15px" }}>(pdf maximum size 3 mb)</small></h3>
       </div>
       <div className="flex-row" style={{ display: "flex", justifyContent: "space-evenly", marginBottom: '20px', width: "95%" }}>
         <div className="col-5">
@@ -43,7 +43,7 @@ function Files({ data, setData }) {
       </div>
 
       <div className='text-white' style={{ marginBottom: "20px" }}>
-        <h3>Adhaar card (pdf maximum size 3 mb)</h3>
+        <h3>Adhaar card <small style={{ fontSize: "15px" }}>(pdf maximum size 3 mb)</small></h3>
       </div>
 
       <div className="w-50" style={{ marginBottom: '20px' }}>

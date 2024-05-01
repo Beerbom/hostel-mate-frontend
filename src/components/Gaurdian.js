@@ -1,6 +1,36 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 function Gaurdian({data,setData}) {
+  const [sameAddress, setSameAddress] = useState(false);
+
+  const handleCheckboxChange = () => {
+    setSameAddress(!sameAddress);
+    if (!sameAddress) {
+      setData({
+        ...data,
+        GAddress1: data.PAddress1,
+        GAddress2: data.PAddress2,
+        GPincode: data.PPincode,
+        GDistrict: data.PDistrict,
+        GState: data.PState,
+        GCountry: data.PCountry
+      });
+    } else {
+      // Clear guardian address fields if checkbox is unchecked
+      setData({
+        ...data,
+        GAddress1: '',
+        GAddress2: '',
+        GPincode: '',
+        GDistrict: '',
+        GState: '',
+        GCountry: ''
+      });
+    }
+  };
+  const handleRelationChange = (e) => {
+    setData({ ...data, Relation: e.target.value });
+  };
   return (
     <div className='mb-6'>
        <div class="form-group " style={{marginBottom:"20px"}}>
@@ -12,12 +42,29 @@ function Gaurdian({data,setData}) {
         <input type="text" onChange={(e)=>setData({...data,GPhoneNo:e.target.value})} value={data.GPhoneNo}
          class="form-control" id="exampleInputContact" style={{marginLeft:'20px',backgroundColor:"#111111",height:"62px",width:"82%"}} placeholder="Contact Number" />
       </div>
-      <div class="form-group " style={{marginBottom:"20px"}}>
-        <input type="text" onChange={(e)=>setData({...data,Relation:e.target.value})} value={data.Relation}
-          class="form-control text-white " style={{backgroundColor:"#111111",height:"62px",width:"95%"}} id="exampleInputName" placeholder="Relationship" />
+      <div className="form-group" style={{ marginBottom: "20px" }}>
+        <select
+          className="form-control text-white"
+          value={data.Relation}
+          onChange={handleRelationChange}
+          style={{ backgroundColor: "#111111", height: "62px", width: "95%" }}
+        >
+          <option value="">Select Relationship</option>
+          <option value="Father">Father</option>
+          <option value="Mother">Mother</option>
+          <option value="Guardian">Guardian</option>
+        </select>
       </div>
-      <div className='text-white'style={{marginBottom:"20px"}}>
-        <h3>Details</h3>
+      <div className="text-white" style={{ marginBottom: "20px" }}>
+        <h3>Address <small style={{ fontSize: "15px" }}>Same as Student's Address <input
+            type="checkbox"
+            onChange={handleCheckboxChange}
+            checked={sameAddress}
+          /> </small></h3>
+        <div>
+         
+          <label htmlFor="sameAddress"></label>
+        </div>
       </div>
       <div class="form-group " style={{marginBottom:"20px"}}>
         <input type="text" onChange={(e)=>setData({...data,GAddress1:e.target.value})} value={data.GAddress1}
