@@ -1,6 +1,33 @@
-import React from 'react'
+import React,{ useState } from 'react'
 
 function PerAddress({data,setData}) {
+  const [sameAsAbove, setSameAsAbove] = useState(false);
+
+  const handleCheckboxChange = () => {
+    setSameAsAbove(!sameAsAbove);
+    if (!sameAsAbove) {
+      setData({
+        ...data,
+        RAddress1: data.PAddress1,
+        RAddress2: data.PAddress2,
+        RPincode: data.PPincode,
+        RDistrict: data.PDistrict,
+        RState: data.PState,
+        RCountry: data.PCountry
+      });
+    } else {
+      // Clear residential address fields if checkbox is unchecked
+      setData({
+        ...data,
+        RAddress1: '',
+        RAddress2: '',
+        RPincode: '',
+        RDistrict: '',
+        RState: '',
+        RCountry: ''
+      });
+    }
+  };
   return (
     <div className='mb-6'>
       <div class="form-group " style={{marginBottom:"20px"}}>
@@ -29,8 +56,18 @@ function PerAddress({data,setData}) {
         </div>
       </div>
       
-      <div className='text-white'style={{marginBottom:"20px"}}>
-        <h3>Details</h3>
+      <div className="text-white" style={{ marginBottom: "20px" }}>
+        <h3>
+          Residential Address{" "}
+          <small style={{ fontSize: "15px" }}>
+            same as above{" "}
+            <input
+              type="checkbox"
+              onChange={handleCheckboxChange}
+              checked={sameAsAbove}
+            />
+          </small>
+        </h3>
       </div>
       <div class="form-group " style={{marginBottom:"20px"}}>
         <input type="text" onChange={(e)=>setData({...data,RAddress1:e.target.value})} value={data.RAddress1}
