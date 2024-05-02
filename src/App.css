@@ -1,0 +1,142 @@
+.screen {
+    position: relative;
+    width: 1728px;
+    height: 800px;
+    
+    background-image: url(pages/photo_2024-05-01_18-27-50.jpg);
+    /* background: #000000; */
+}
+
+/* HOSTEL-MATE */
+.hostel-mate {
+    position: absolute;
+    width: 754px;
+    height: 120px;
+    left: 400px;
+    top: 156px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 800;
+
+    font-size: 98.0813px;
+    line-height: 120px;
+    text-align: center;
+    color: #FF0000;
+}
+
+/* REGISTRATION */
+.registration {
+    position: absolute;
+    width: 301px;
+    height: 36px;
+    left: 400px;
+    top: 437px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 35px;
+    line-height: 43px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+/* Group 259 */
+.group-259 {
+    position: absolute;
+    width: 75px;
+    height: 75px;
+    left: 669px;
+    top: 504px;
+    transform: rotate(90deg);
+}
+
+/* Ellipse 109 */
+.ellipse-109 {
+    position: absolute;
+    border-radius: 50px;
+    width: 75px;
+    height: 75px;
+    left: 505px;
+    top: 490px;
+    /* background:#FF0000; */
+    transform: rotate(90deg);
+}
+.ellipse-109 img{
+    
+    height: 100px;  
+
+}
+.ellipse-209 img{
+    
+    height: 100px;  
+
+}
+/* Arrow */
+/*.arrow {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    left: 656px;
+    top: 517px;
+    background: url(pages/istockphoto-944808858-170667a-removebg-preview.png); 
+    transform: rotate(90deg);
+}
+
+/* Group 260 */
+/*.group-260 {
+    position: absolute;
+    width: 75px;
+    height: 75px;
+    left: 1000px;
+    top: 579px;
+    transform: rotate(-90deg);
+}
+
+/* Ellipse 109 */
+.ellipse-209 {
+    position: absolute;
+    border-radius: 50px;
+    width: 75px;
+    height: 75px;
+    left: 1044px;
+    top: 510px;
+    /* background: #FF0000; */
+    transform: rotate(-90deg);
+}
+
+/* Arrow */
+/*.arrow {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    left: 1046px;
+    top: 566px;
+    background-image: url(pages/photo_2024-04-29_21-08-43.jpg);
+   transform: rotate(-90deg);
+}*/
+
+/* LOGIN */
+.login {
+    position: absolute;
+    width: 161px;
+    height: 35.56px;
+    left: 1000px;
+    top: 430px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 34.5706px;
+    line-height: 42px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.bg{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    left: 656px;
+    top: 517px;
+    background: url(pages/istockphoto-944808858-170667a-removebg-preview.png); 
+}
+

@@ -15,7 +15,7 @@ function Navbar() {
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#"><Link to="/fetch">submit</Link></a>
-        </li>
+        </li>  
         <li class="nav-item">
           <a class="nav-link" href="#"><Link to="/attendance">Attendance</Link></a>
         </li>

@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import UserView from './components/UserView';
 import MessDuty from './components/MessDuty';
 import Attendance from './components/Show';
+import Front from './components/Front';
 
 
 
@@ -19,12 +20,13 @@ function App() {
     <Router>
         <Navbar />
         <Routes>
-          <Route path="/" exact element={<Form/>} />
+          <Route path="/front" exact element={<Form/>} />
           <Route path="/fetch" element={<Fetch/>  } />
           <Route path="/attendance" element={<AttendancePage/>  } />
           <Route path="/userview" element={<UserView/>  } />
           <Route path="/messduty" element={<MessDuty/>  } />
           <Route path="/view" element={<Attendance/>  } />
+          <Route path="/" element={<Front/>  } />
         </Routes>
       </Router>
 
