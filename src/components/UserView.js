@@ -37,7 +37,7 @@ function UserView() {
     <div className="container">
       <h1 className="my-4">Allotted Details</h1>
       <div className="row">
-        {allottedDetails.map((detail,index) => (
+        {allottedDetails && allottedDetails.map((detail,index) => (
           <div key={detail._id} className="col-md-4">
             <div className="card mb-4">
               <div className="card-body">
