@@ -10,6 +10,9 @@ import MessDuty from './components/MessDuty';
 import Attendance from './components/Show';
 import Front from './components/Front';
 
+import Login from './components/login';
+
+
 
 
 axios.defaults.baseURL='http://localhost:5000';
@@ -27,6 +30,9 @@ function App() {
           <Route path="/messduty" element={<MessDuty/>  } />
           <Route path="/view" element={<Attendance/>  } />
           <Route path="/" element={<Front/>  } />
+
+          <Route path="/login" element={<Login/>  } />
+
         </Routes>
       </Router>
 
