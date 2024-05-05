@@ -9,7 +9,9 @@ import UserView from './components/UserView';
 import MessDuty from './components/MessDuty';
 import Attendance from './components/Show';
 import Front from './components/Front';
+
 import Login from './components/login';
+
 
 
 
@@ -28,7 +30,9 @@ function App() {
           <Route path="/messduty" element={<MessDuty/>  } />
           <Route path="/view" element={<Attendance/>  } />
           <Route path="/" element={<Front/>  } />
+
           <Route path="/login" element={<Login/>  } />
+
         </Routes>
       </Router>
 
