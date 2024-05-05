@@ -76,6 +76,7 @@ function Form() {
         return <Student data={data} setData={setData} />;
       case 1:
         return <PerAddress data={data} setData={setData} />;
+      
       case 2:
         return <Gaurdian data={data} setData={setData} />;
       default:
