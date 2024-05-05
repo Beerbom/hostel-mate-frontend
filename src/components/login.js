@@ -9,6 +9,7 @@ function Login({ history }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      //
       const response = await axios.post('/login', { AdmNo, password });
       console.log(response.data); // Handle successful login or store token
       history.push('/nextpage'); // Redirect to next page upon successful login
