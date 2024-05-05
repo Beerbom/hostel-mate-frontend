@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
+import { useNavigate } from 'react-router-dom';
 function Login({ history }) {
+  const navigate=useNavigate()
   const [AdmNo, setAdmNo] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -11,8 +14,14 @@ function Login({ history }) {
     try {
       //
       const response = await axios.post('/login', { AdmNo, password });
-      console.log(response.data); // Handle successful login or store token
-      history.push('/nextpage'); // Redirect to next page upon successful login
+      if (response && response.data) {
+        console.log(response.data); // Handle successful login or store token
+        //history.push('/nextpage'); // Redirect to next page upon successful login
+        navigate("/nextpage")
+      } else {
+        console.error('Invalid response from server:', response);
+        setErrorMessage('An error occurred while logging in. Please try again.');
+      }
     } catch (error) {
       console.error('Error logging in:', error.response.data.error);
       setErrorMessage('Username or password is incorrect.');
@@ -21,8 +30,8 @@ function Login({ history }) {
 
   return (
     <div className='d-flex justify-content-center'>
-      <div className='py-8 px-4 shadow rounded-lg px-10 w-100 mt-10 rounded' style={{ backgroundColor: "#2E2E2E", maxWidth: "500px", marginTop: "50px", height: "300px" }}>
-        <h2 className='mt-3 text-white mb-3'>Login</h2>
+      <div className='py-8 px-4 shadow rounded-lg px-10 w-100 mt-10 rounded' style={{ backgroundColor: "#2E2E2E", maxWidth: "500px", marginTop: "50px", maxHeight: "1800px" }}>
+        <h2 className='mt-3 text-white mb-3 '>Login</h2>
         {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
         <form onSubmit={handleSubmit}>
           <div className="form-group" style={{ marginBottom: "20px" }}>
