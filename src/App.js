@@ -11,6 +11,9 @@ import Attendance from './components/Show';
 import Front from './components/Front';
 
 import Login from './components/login';
+import UserPage from './components/UserPage';
+import AdminLogin from './components/AdminLogin';
+import Complaints from './components/Complaints';
 
 
 
@@ -30,8 +33,11 @@ function App() {
           <Route path="/messduty" element={<MessDuty/>  } />
           <Route path="/view" element={<Attendance/>  } />
           <Route path="/" element={<Front/>  } />
-
           <Route path="/login" element={<Login/>  } />
+          <Route path="/nextpage"element={<UserPage/>}/>
+          <Route path="/admin"element={<AdminLogin/>}/>
+          <Route path="/complaints"element={<Complaints/>}/>
+
 
         </Routes>
       </Router>

@@ -28,6 +28,9 @@ function Navbar() {
         <li class="nav-item">
           <a class="nav-link"><Link to="/view">view</Link></a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link"><Link to="/complaints">complaint</Link></a>
+        </li>
       </ul>
     </div>
   </div>
