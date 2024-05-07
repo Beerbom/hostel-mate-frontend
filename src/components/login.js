@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-
 import { useNavigate } from 'react-router-dom';
-function Login({ history }) {
-  const navigate=useNavigate()
+
+function Login() {
+  const navigate = useNavigate();
   const [AdmNo, setAdmNo] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -12,17 +11,12 @@ function Login({ history }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      //
       const response = await axios.post('/login', { AdmNo, password });
-      if (response && response.data) {
-        console.log(response.data); // Handle successful login or store token
-        //history.push('/nextpage'); // Redirect to next page upon successful login
-        navigate("/nextpage")
-      } else {
-        console.error('Invalid response from server:', response);
-        setErrorMessage('An error occurred while logging in. Please try again.');
-      }
-    } catch (error) {
+       // Handle successful login or store token
+       
+        navigate("/nextpage"); // Redirect to user page after login
+      } 
+     catch (error) {
       console.error('Error logging in:', error.response.data.error);
       setErrorMessage('Username or password is incorrect.');
     }
