@@ -9,12 +9,11 @@ import UserView from './components/UserView';
 import MessDuty from './components/MessDuty';
 import Attendance from './components/Show';
 import Front from './components/Front';
-
 import Login from './components/login';
 import UserPage from './components/UserPage';
 import AdminLogin from './components/AdminLogin';
 import Complaints from './components/Complaints';
-
+import { UserContextProvider } from './context/userContext'
 
 
 
@@ -22,7 +21,7 @@ axios.defaults.baseURL='http://localhost:5000';
 axios.defaults.withCredentials=true
 function App() {
   return (
-    <div className="App">
+    <UserContextProvider>
     <Router>
         <Navbar />
         <Routes>
@@ -42,7 +41,7 @@ function App() {
         </Routes>
       </Router>
 
-    </div>
+    </UserContextProvider>
   );
 }
 
