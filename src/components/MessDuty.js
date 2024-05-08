@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import NavBar from './Navbar';
 
 function MessDuty() {
   const [allocationMessage, setAllocationMessage] = useState('');
@@ -59,6 +60,7 @@ function MessDuty() {
 
   return (
     <div>
+      <NavBar />
       <h2>Mess Duty Allocation</h2>
       <button className='btn btn-primary' onClick={handleAllocateMessDuty}>
         Allocate Mess Duty

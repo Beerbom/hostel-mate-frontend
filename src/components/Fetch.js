@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import NavBar from './Navbar';
 
 const CardComponent = () => {
   const [data, setData] = useState([]);
@@ -13,52 +14,45 @@ const CardComponent = () => {
       .then(response => {
         // Custom sorting function
         const customSort = (a, b) => {
-          // Define priority based on caste
           const priorityOrder = {
             "SC/ST": 0,
-            "OEC": 0,
-            "BPL": 0,
-            "None": 1 // Other categories have no priority
+            "OEC": 1,
+            "BPL": 2,
+            "None": 3 // Other categories have no priority
           };
-  
-          // Check if students are from Kerala
-          const isFromKerala = (student) => student.PState === 'Kerala';
-  
-          // Assign default priority if not defined
-          const priorityA = a.Priority || "None";
-          const priorityB = b.Priority || "None";
-  
-          // Check if students are from Kerala
-          const fromKeralaA = isFromKerala(a);
-          const fromKeralaB = isFromKerala(b);
-  
-          // Compare students from Kerala vs outside Kerala
-          if (!fromKeralaA && fromKeralaB) return -1; // Student A is from outside Kerala, but student B is from Kerala
-          if (fromKeralaA && !fromKeralaB) return 1; // Student B is from outside Kerala, but student A is from Kerala
-  
-          // If students are from Kerala, caste priority is not considered
-          if (fromKeralaA && fromKeralaB) {
-            // If caste priority is the same, compare income
-            if (priorityOrder[priorityA] === priorityOrder[priorityB]) {
-              return a.Income - b.Income;
+        
+          const isFromKerala = (student) => student.PState.toUpperCase() === 'KERALA';
+        
+          const getPriorityValue = (student) => {
+            const priority = student.Priority || "None";
+            return priorityOrder[priority];
+          };
+        
+          // Compare students based on whether they are from Kerala
+          if (isFromKerala(a) !== isFromKerala(b)) {
+            return isFromKerala(a) ? 1 : -1; // Sort non-Kerala students first
+          }
+        
+          // For students from Kerala, sort based on priority and income
+          if (isFromKerala(a)) {
+            const priorityDiff = getPriorityValue(a) - getPriorityValue(b);
+            if (priorityDiff !== 0) {
+              return priorityDiff;
             }
-            // Compare priority based on caste
-            return priorityOrder[priorityA] - priorityOrder[priorityB];
+            return a.Income - b.Income; // If priority is the same, compare by income
           }
-  
-          // If students are from outside Kerala, caste priority is considered
-          // Compare priority based on caste
-          if (priorityOrder[priorityA] !== priorityOrder[priorityB]) {
-            return priorityOrder[priorityA] - priorityOrder[priorityB];
-          }
-  
-          // If caste priority is the same, compare income
+        
+          // For students outside Kerala, sort only by income
           return a.Income - b.Income;
         };
-  
-        // Sort the users array
+        
+        // Usage in useEffect:
         const sortedUsers = response.data.sort(customSort);
-        setData(sortedUsers.map(user => ({ ...user, selectedPdf: null, showDetails: false }))); // Add selectedPdf and showDetails property to each user
+        setData(sortedUsers.map(user => ({ ...user, selectedPdf: null, showDetails: false })));
+        
+   
+        // Sort the users array
+         // Add selectedPdf and showDetails property to each user
       })
       .catch(error => console.log(error));
   
@@ -114,6 +108,7 @@ const CardComponent = () => {
   };
 
   return (
+    <><NavBar/>
     <div className="container">
       <div className="row">
         {data.map((item, index) => (
@@ -175,6 +170,7 @@ const CardComponent = () => {
         ))}
       </div>
     </div>
+    </>
   );
 };
 

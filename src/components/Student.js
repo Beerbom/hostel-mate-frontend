@@ -6,7 +6,16 @@ function Student({data,setData}) {
   };
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setData({ ...data, [name]: value.toUpperCase() }); 
+    if (name === 'PhoneNo' && !/^\d{10}$/.test(value)) {
+      alert('Phone Number must be numeric and have exactly 10 digits.');
+      return;
+    }
+    // Admission Number validation: must have exactly 9 characters
+    if (name === 'AdmNo' && value.length !== 9) {
+      alert('Admission Number must have exactly 9 characters.');
+      return;
+    }
+    setData({ ...data, [name]: name === 'Name' ? value.toUpperCase() : value }); 
   };
   return (
     <div className='mb-6'>

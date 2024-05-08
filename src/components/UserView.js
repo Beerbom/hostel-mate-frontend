@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import NavBar from './Navbar';
 
 function UserView() {
   const [allottedDetails, setAllottedDetails] = useState([]);
@@ -34,7 +35,9 @@ function UserView() {
     setShowDetailsIndex(index === showDetailsIndex ? null : index);
 };
   return (
+    <><NavBar />
     <div className="container">
+      
       <h1 className="my-4">Allotted Details</h1>
       <div className="row">
         {allottedDetails && allottedDetails.map((detail,index) => (
@@ -65,6 +68,7 @@ function UserView() {
         ))}
       </div>
     </div>
+    </>
   );
 }
 

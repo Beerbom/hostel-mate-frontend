@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import NavBar from './Navbar';
 
 const AttendancePage = () => {
     const [students, setStudents] = useState([]);
@@ -63,7 +64,9 @@ const AttendancePage = () => {
     };
 
     return (
+        <><NavBar />
         <div className="container">
+            
             <h1 className="text-center mt-4">Attendance Page</h1>
             <label className="d-block text-center">Select Date:</label>
             <input
@@ -106,6 +109,7 @@ const AttendancePage = () => {
                 <button className="btn btn-primary" onClick={handleSubmit}>Submit Attendance</button>
             </div>
         </div>
+        </>
     );
 };
 

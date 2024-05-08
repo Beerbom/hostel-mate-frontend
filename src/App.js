@@ -14,6 +14,8 @@ import UserPage from './components/UserPage';
 import AdminLogin from './components/AdminLogin';
 import Complaints from './components/Complaints';
 import { UserContextProvider } from './context/userContext'
+import UserNavbar from './components/UserNavbar';
+import ComplaintForm from './components/ComplaintForm';
 
 
 
@@ -21,9 +23,10 @@ axios.defaults.baseURL='http://localhost:5000';
 axios.defaults.withCredentials=true
 function App() {
   return (
-    <UserContextProvider>
+    <>
     <Router>
-        <Navbar />
+      
+        
         <Routes>
           <Route path="/front" exact element={<Form/>} />
           <Route path="/fetch" element={<Fetch/>  } />
@@ -36,12 +39,14 @@ function App() {
           <Route path="/nextpage"element={<UserPage/>}/>
           <Route path="/admin"element={<AdminLogin/>}/>
           <Route path="/complaints"element={<Complaints/>}/>
+          <Route path="/complaint"element={<ComplaintForm/>}/>
 
 
         </Routes>
+        
       </Router>
 
-    </UserContextProvider>
+    </>
   );
 }
 
