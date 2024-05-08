@@ -82,21 +82,20 @@ const UserPage = () => {
       {user && user.Name ? (
         <UserNavbar username={user} />
       ) : null}
-      <h1>User Profile</h1>
+      <h3>User Profile</h3>
       {loading ? (
         <p>Loading...</p>
       ) : error ? (
         <p>Error: {error}</p>
       ) : user ? (
         <div>
-          <p>AdmNo: {user.AdmNo}</p>
-          <p>Name: {user.Name}</p>
+          <h6>AdmNo: {user.AdmNo}</h6>
         </div>
       ) : (
         <p>No user profile data found.</p>
       )}
 
-      <h2>Mess Duty Data</h2>
+      <h3>Mess Duty Data</h3>
       {messDutyData.length > 0 ? (
         <ul>
           {messDutyData.map((duty, index) => (
@@ -109,21 +108,24 @@ const UserPage = () => {
         <p>No mess duty data found for the logged-in user.</p>
       )}
 
-      <h2>Complaint Registration</h2>
+      <h3>Complaint Registration</h3>
       {complaintSuccess && <p style={{ color: 'green' }}>Complaint submitted successfully!</p>}
       <form onSubmit={handleComplaintSubmit}>
-        <div>
-          <label htmlFor="complaint">Complaint:</label>
-          {/* Display read-only input fields for Name and AdmNo */}
-          <input type="text" value={user?.Name} readOnly />
-          <input type="text" value={user?.AdmNo} readOnly />
+        <div className=''>
+        <div className='d-flex mt-3 my-3 mx-5'><input style={{border:"none", background:"none"}} type="text" value={user?.Name} readOnly />
+        <input style={{border:"none", background:"none"}} type="text" value={user?.AdmNo} readOnly /></div>
+          
+          <div className='d-flex mt-3 my-3 mx-5'>
           <textarea
+            style={{width:'550px',height:'250px'}}
             id="complaint"
             value={complaint}
             onChange={(e) => setComplaint(e.target.value)}
           ></textarea>
+          </div>
+          <button className='btn btn-primary ' style={{marginLeft:'440px'}} type="submit">Submit Complaint</button>
         </div>
-        <button type="submit">Submit Complaint</button>
+        
         {complaintError && <p style={{ color: 'red' }}>{complaintError}</p>}
       </form>
     </div>

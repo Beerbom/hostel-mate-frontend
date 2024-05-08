@@ -16,6 +16,7 @@ import Complaints from './components/Complaints';
 import { UserContextProvider } from './context/userContext'
 import UserNavbar from './components/UserNavbar';
 import ComplaintForm from './components/ComplaintForm';
+import MessBillCalculation from './components/MessBillCalculation';
 
 
 
@@ -35,6 +36,7 @@ function App() {
           <Route path="/messduty" element={<MessDuty/>  } />
           <Route path="/view" element={<Attendance/>  } />
           <Route path="/" element={<Front/>  } />
+          <Route path="/messbill" element={<MessBillCalculation/>  } />
           <Route path="/login" element={<Login/>  } />
           <Route path="/nextpage"element={<UserPage/>}/>
           <Route path="/admin"element={<AdminLogin/>}/>

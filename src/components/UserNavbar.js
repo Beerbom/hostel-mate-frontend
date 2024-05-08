@@ -50,15 +50,19 @@ function UserNavbar({ username }) {
     <>
       <Navbar className="bg-body-tertiary" style={{ background: '#000000' }}>
         <Container>
-          <Navbar.Brand href="#home">Mess Bill</Navbar.Brand>
+          {/* <Navbar.Brand href="#home">Mess Bill</Navbar.Brand> */}
           
+          <Navbar.Brand href="#home">{username.Name}</Navbar.Brand>
           <Navbar.Brand href="#home"></Navbar.Brand>
           <Navbar.Brand href="#home"></Navbar.Brand>
-          <Navbar.Brand href="#home">Mess Duty</Navbar.Brand>
+          <Navbar.Brand href="#home"></Navbar.Brand>
+          <Navbar.Brand href="#home"></Navbar.Brand>
+          <Navbar.Brand href="#home">Room No:{username.Room_No}</Navbar.Brand>
+          {/* <Navbar.Brand href="#home">Mess Duty</Navbar.Brand> */}
           
+        
           <Navbar.Brand href="#home"></Navbar.Brand>
-          <Navbar.Brand href="#home"></Navbar.Brand>
-          <Navbar.Brand href="#home"  onClick={handleComplaintLink}>Feedback</Navbar.Brand>
+          {/* <Navbar.Brand href="#home"  onClick={handleComplaintLink}>Feedback</Navbar.Brand> */}
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>

@@ -36,8 +36,8 @@ function Login() {
   };
 
   return (
-    <div className='d-flex justify-content-center'>
-      <div className='py-8 px-4 shadow rounded-lg px-10 w-100 mt-10 rounded' style={{ backgroundColor: "#2E2E2E", maxWidth: "500px", marginTop: "50px", maxHeight: "1800px" }}>
+    <div className='d-flex justify-content-center '>
+      <div className='py-8 px-4 shadow rounded-lg   px-10 w-100 mt-10 rounded ' style={{ backgroundColor: "#2E2E2E", maxWidth: "500px",minHeight:"350px", marginTop: "50px", maxHeight: "1800px" }}>
         <h2 className='mt-3 text-white mb-3'>Login</h2>
         {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
         <form onSubmit={handleSubmit}>

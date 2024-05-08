@@ -21,7 +21,7 @@ function NavBar() {
         <Navbar.Text ><Link to="/attendance">Attendance</Link></Navbar.Text>
         <Navbar.Text ><Link to="/userview">Inmates</Link></Navbar.Text>
         <Navbar.Text ><Link to="/messduty">MessDuty</Link></Navbar.Text>
-        <Navbar.Text ><Link to="">MessBill</Link></Navbar.Text>
+        <Navbar.Text ><Link to="/messbill">MessBill</Link></Navbar.Text>
         <Navbar.Text ><Link to="/fetch">Allotment</Link></Navbar.Text>
         <Navbar.Text ><Link to="/complaints">Complaint</Link></Navbar.Text>
         </Navbar.Collapse>
