@@ -10,6 +10,7 @@ const UserPage = () => {
   const [complaint, setComplaint] = useState('');
   const [complaintSuccess, setComplaintSuccess] = useState(false);
   const [complaintError, setComplaintError] = useState('');
+  const [messBill, setMessBill] = useState(null);
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -51,6 +52,25 @@ const UserPage = () => {
         setMessDutyData([]);
       }
     };
+    const fetchMessBill = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          throw new Error('Token not found');
+        }
+
+        const response = await axios.get('/usermessbillgen', {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        console.log(response.data.userMessBill)
+        setMessBill(response.data.userMessBill);
+      } catch (error) {
+        setError('Error fetching mess bill');
+      }
+    };
+
+    fetchMessBill();
 
     fetchUserMessDuty();
   }, []);
@@ -106,6 +126,16 @@ const UserPage = () => {
         </ul>
       ) : (
         <p>No mess duty data found for the logged-in user.</p>
+      )}
+      <h3>Mess Bill Details</h3>
+      {messBill ? (
+        <div>
+          <p>Amount: {messBill.Amount}</p>
+          <p>Fine: {messBill.Fine}</p>
+          <p>TotalAttendance: {messBill.TotalAttendance}</p>
+        </div>
+      ) : (
+        <p>No mess bill details found for the logged-in user.</p>
       )}
 
       <h3>Complaint Registration</h3>

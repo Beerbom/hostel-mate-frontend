@@ -29,10 +29,13 @@ function ComplaintViewer() {
   return (
     <div>
       <NavBar />
+      <div className='container'> 
       {error && <div>Error: {error}</div>}
+      <div className='mt-5'>
       <table className="table table-bordered table-striped table-lg mx-auto" style={{ width: '80%' }}>
         <thead>
           <tr>
+          <th className="text-center">ADM NO</th>
             <th className="text-center">Student Name</th>
             <th className="text-center">Complaint</th>
           </tr>
@@ -40,12 +43,15 @@ function ComplaintViewer() {
         <tbody>
           {complaint.map((item, index) => (
             <tr key={index}>
+              <td className="text-center">{item.AdmNo}</td>
               <td className="text-center">{item.Name}</td>
               <td className="text-center">{item.Complaint}</td>
             </tr>
           ))}
         </tbody>
       </table>
+    </div>
+    </div>
     </div>
   );
 }
