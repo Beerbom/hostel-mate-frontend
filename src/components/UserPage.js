@@ -11,6 +11,7 @@ const UserPage = () => {
   const [complaintSuccess, setComplaintSuccess] = useState(false);
   const [complaintError, setComplaintError] = useState('');
   const [messBill, setMessBill] = useState(null);
+  const [messBillData, setMessBillData] = useState(null);
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -59,7 +60,7 @@ const UserPage = () => {
           throw new Error('Token not found');
         }
 
-        const response = await axios.get('/usermessbillgen', {
+        const response = await axios.get('/usermessbill', {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -71,7 +72,7 @@ const UserPage = () => {
     };
 
     fetchMessBill();
-
+    handleButtonClick();
     fetchUserMessDuty();
   }, []);
 
@@ -96,20 +97,30 @@ const UserPage = () => {
       setComplaintError(error.response?.data?.error || 'Error submitting complaint');
     }
   };
+  const handleButtonClick = async () => {
+    try {
+      const response = await axios.get('/latest-messbill');
+      console.log(response.data);
+      setMessBillData(response.data.messBillData);
+    } catch (error) {
+      console.error('Error fetching latest mess bill data:', error);
+      // Handle error: show error message, etc.
+    }
+  };
 
   return (
     <div>
       {user && user.Name ? (
         <UserNavbar username={user} />
       ) : null}
-      <h3>User Profile</h3>
+      
       {loading ? (
         <p>Loading...</p>
       ) : error ? (
-        <p>Error: {error}</p>
+        <p></p>
       ) : user ? (
         <div>
-          <h6>AdmNo: {user.AdmNo}</h6>
+          <h6>AdmNo: {user.TotalAmount}</h6>
         </div>
       ) : (
         <p>No user profile data found.</p>
@@ -128,6 +139,13 @@ const UserPage = () => {
         <p>No mess duty data found for the logged-in user.</p>
       )}
       <h3>Mess Bill Details</h3>
+      {user ?(
+      <div><p>Total Amount to be paid for this month:{Math.round(user.TotalAmount)}</p>
+      <h3>Attendance :{user.TotalAttendance}</h3>
+      </div>
+        
+        
+      ) : (<p></p>)}
       {messBill ? (
         <div>
           <p>Amount: {messBill.Amount}</p>
@@ -135,7 +153,44 @@ const UserPage = () => {
           <p>TotalAttendance: {messBill.TotalAttendance}</p>
         </div>
       ) : (
-        <p>No mess bill details found for the logged-in user.</p>
+        <p></p>
+      )}
+      {messBillData && (
+        <div>
+          
+          <table className="table table-bordered table-striped table-lg mx-auto" style={{ width: '80%' }}>
+            <thead>
+              <tr>
+                <th className="text-center">Date</th>
+                <th className="text-center">Total Establishment Charge</th>
+                <th className="text-center">Total Food Charge</th>
+                
+                <th className="text-center"> RatePerday</th>
+                <th className="text-center"> No Of Users</th>
+                <th className="text-center"> TotalAttendance</th>
+                <th className="text-center">TotalFine</th>
+                <th className="text-center"> essCharge</th>
+                {/* Add more columns as needed */}
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="text-center">{messBillData.date}</td>
+                <td className="text-center">{messBillData.TotalEstablishmentcharge}</td>
+                <td className="text-center">{messBillData.TotalFoodCharge}</td>
+                
+                <td className="text-center">{Math.round(messBillData.RatePerDay)}</td>
+                <td className="text-center">{messBillData.NumberofUser}</td>
+                <td className="text-center">{messBillData.TotalAttendance}</td>
+                <td className="text-center">{messBillData.Fine}</td>
+                <td className="text-center">{Math.round(messBillData.esscharge)}</td>
+                
+                
+              </tr>
+            </tbody>
+          </table>
+          
+        </div>
       )}
 
       <h3>Complaint Registration</h3>
