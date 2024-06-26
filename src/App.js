@@ -19,7 +19,7 @@ import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
-axios.defaults.baseURL='https://hostel-mate-backend.vercel.app';
+axios.defaults.baseURL='http://localhost:5000';
 axios.defaults.withCredentials=true
 function App() {
   return (
