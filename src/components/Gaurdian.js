@@ -33,14 +33,15 @@ function Gaurdian({data,setData}) {
   };
   return (
     <div className='mb-6'>
+      fill all the field necessary * in this section
        <div class="form-group " style={{marginBottom:"20px"}}>
         <input type="text" onChange={(e)=>setData({...data,GName:e.target.value})} value={data.GName}
-         class="form-control text-white " style={{backgroundColor:"#111111",height:"62px",width:"95%"}} id="exampleInputName" placeholder="Gaurdian Name" />
+         class="form-control text-white " style={{backgroundColor:"#111111",height:"62px",width:"95%"}} id="exampleInputName" placeholder="Gaurdian Name *" />
       </div>
       <div class="form-group d-flex" style={{marginBottom:"20px"}}>
       <input type="text" readonly class="form-control " value="+91" style={{height:'62px',width:'10%',backgroundColor:'#3E3E3E',color:'#A59191'}}/>
         <input type="text" onChange={(e)=>setData({...data,GPhoneNo:e.target.value})} value={data.GPhoneNo}
-         class="form-control" id="exampleInputContact" style={{marginLeft:'20px',backgroundColor:"#111111",height:"62px",width:"82%"}} placeholder="Contact Number" />
+         class="form-control" id="exampleInputContact" style={{marginLeft:'20px',backgroundColor:"#111111",height:"62px",width:"82%"}} placeholder="Contact Number *" />
       </div>
       <div className="form-group" style={{ marginBottom: "20px" }}>
         <select
@@ -49,7 +50,7 @@ function Gaurdian({data,setData}) {
           onChange={handleRelationChange}
           style={{ backgroundColor: "#111111", height: "62px", width: "95%" }}
         >
-          <option value="">Select Relationship</option>
+          <option value="">Select Relationship *</option>
           <option value="Father">Father</option>
           <option value="Mother">Mother</option>
           <option value="Guardian">Guardian</option>

@@ -2,12 +2,18 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import NavBar from './Navbar';
 
+const Loader = () => (
+  <div className="loader">
+    <span className="loader-text">Loading...</span>
+    <span className="load"></span>
+  </div>
+);
 function MessBillForm() {
   const [formData, setFormData] = useState({
     date: '',
     TotalEstablishmentcharge: 0,
     TotalFoodCharge: 0,
-    Fine: 0,
+    Fine:0,
   });
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
@@ -19,7 +25,7 @@ function MessBillForm() {
   useEffect(() => {
     const fetchLatestMessBill = async () => {
       try {
-        const response = await axios.get('/latest-messbill');
+        const response = await axios.get('/api/latest-messbill');
         const latestMessBillData = response.data.messBillData;
         setFormData({
           date: latestMessBillData.date,
@@ -34,7 +40,7 @@ function MessBillForm() {
 
     const genLatestMessBill = async () => {
       try {
-        const response = await axios.get('/messbillgen');
+        const response = await axios.get('/api/messbillgen');
         setLatestMessBill(response.data.latestMessBill);
         setEditedMessBills(response.data.latestMessBill.messBills); // Initialize edited mess bills with latest data
         setLoading(false);
@@ -62,7 +68,7 @@ function MessBillForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/messbilll', formData);
+      const response = await axios.post('/api/messbilll', formData);
       setMessage(response.data.message);
     } catch (error) {
       setError(error.response?.data?.error || 'Failed to calculate and save mess bills');
@@ -70,7 +76,7 @@ function MessBillForm() {
   };
   const handleConfirmUpdate = async () => {
     try {
-      const response = await axios.post('/update-messbills', { messBills: editedMessBills });
+      const response = await axios.post('/api/update-messbills', { messBills: editedMessBills });
       setMessage(response.data.message);
       setIsEditing(false); // Turn off editing mode after successful update
     } catch (error) {
@@ -85,6 +91,9 @@ function MessBillForm() {
         <h2 className="mb-4">Mess Bill Form</h2>
         {message && <div className="alert alert-success">{message}</div>}
         {error && <div className="alert alert-danger">{error}</div>}
+        {loading ? (
+          <Loader /> // Show loader component when loading is true
+        ) : (
         <form onSubmit={handleSubmit}>
           <label htmlFor="date">Date:</label>
           <input type="text" style={{ border: "none", background: "none", outline: 'none', caretColor: 'transparent' }} id="date" name="date" value={formData.date} readOnly />
@@ -100,6 +109,7 @@ function MessBillForm() {
 
           <button type="submit" style={{ color: '#ffffff' }} className="btn btn-warning align-items-center mt-3">Generate Mess Bill</button>
         </form>
+        )}
         <div>
           <h5>Latest Mess Bill</h5>
           {loading ? (
@@ -124,7 +134,7 @@ function MessBillForm() {
                     <th className="text-center"> Amount</th>
                     <th className="text-center">Fine</th>
                     <th className="text-center"> Total Amount</th>
-                    {/* Add more columns as needed */}
+                    
                   </tr>
                 </thead>
                 <tbody>
