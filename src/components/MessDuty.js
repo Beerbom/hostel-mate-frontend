@@ -6,47 +6,61 @@ function MessDuty() {
   const [allocationMessage, setAllocationMessage] = useState('');
   const [messDutyData, setMessDutyData] = useState([]);
   const [lastClickedDate, setLastClickedDate] = useState(null);
+  const [loading, setLoading] = useState(false); // Add loading state
 
   useEffect(() => {
     fetchMessDutyData();
   }, []);
 
   const handleAllocateMessDuty = () => {
+    setLoading(true); // Set loading to true when button is clicked
+
     if (lastClickedDate && isSameDay(new Date(), lastClickedDate)) {
       setAllocationMessage('Button disabled for today.');
+      setLoading(false); // Set loading to false after handling the click
       return;
     }
 
     setLastClickedDate(new Date());
-    axios.post('/allocate-mess-duty')
+    axios.post('/api/allocate-mess-duty')
       .then(response => {
         setAllocationMessage(response.data.message);
         fetchMessDutyData();
+        setLoading(false); // Set loading to false after handling the click
       })
       .catch(error => {
         console.error('Error allocating mess duty:', error);
         setAllocationMessage('Error allocating mess duty');
+        setLoading(false); // Set loading to false after handling the click
       });
   };
 
   const fetchMessDutyData = () => {
-    axios.get('/mess-duty')
+    setLoading(true); // Set loading to true when fetching data
+
+    axios.get('/api/mess-duty')
       .then(response => {
         setMessDutyData(response.data);
+        setLoading(false); // Set loading to false after fetching data
       })
       .catch(error => {
         console.error('Error fetching mess duty data:', error);
+        setLoading(false); // Set loading to false after fetching data
       });
   };
 
   const handleDeleteAllMessDuty = () => {
-    axios.delete('/delete-all-mess-duty')
+    setLoading(true); // Set loading to true when button is clicked
+
+    axios.delete('/api/delete-all-mess-duty')
       .then(response => {
         console.log(response.data.message);
         fetchMessDutyData();
+        setLoading(false); // Set loading to false after handling the click
       })
       .catch(error => {
         console.error('Error deleting all mess duty data:', error);
+        setLoading(false); // Set loading to false after handling the click
       });
   };
 
@@ -62,7 +76,11 @@ function MessDuty() {
     <div>
       <NavBar />
       <h2>Mess Duty Allocation</h2>
-      <button className='btn btn-primary' onClick={handleAllocateMessDuty}>
+      <div className="loader" style={{ display: loading ? 'flex' : 'none' }}>
+        <span className="loader-text">loading</span>
+        <span className="load"></span>
+      </div>
+      <button className='btn btn-primary' onClick={handleAllocateMessDuty} disabled={messDutyData.length > 0}>
         Allocate Mess Duty
       </button>
       <button className='btn btn-danger' onClick={handleDeleteAllMessDuty}>Delete All Mess Duty Data</button>

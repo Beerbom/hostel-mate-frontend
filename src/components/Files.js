@@ -3,7 +3,8 @@ import React from 'react';
 function Files({ data, setData }) {
   return (
     <div className='mb-6'>
-      <div className=' text-white rounded' style={{marginBottom:"30px",backgroundColor:"#111111",height:"62px",display:'flex',width:"95%",justifyContent:'space-evenly',alignItems:'center'}}>Priority
+      fill all the field necessary *
+      <div className=' text-white rounded' style={{marginBottom:"30px",backgroundColor:"#111111",height:"62px",display:'flex',width:"95%",justifyContent:'space-evenly',alignItems:'center'}}>Priority *
         <div class="form-check form-check-inline" >
 
           <input class="form-check-input" onChange={(e)=>setData({...data,Priority:e.target.value})} value="SC/ST" checked={data.Priority === "SC/ST"} type="radio" name="priority" id="priority1"   />
@@ -35,7 +36,7 @@ function Files({ data, setData }) {
       </div>
       <div className="flex-row" style={{ display: "flex", justifyContent: "space-evenly", marginBottom: '20px', width: "95%" }}>
         <div className="col-5">
-          <input type="text" className="form-control" onChange={(e) => setData({ ...data, Income: e.target.value })} value={data.Income} placeholder="Annual Income" style={{ backgroundColor: "#111111", height: "62px" }} required />
+          <input type="text" className="form-control" onChange={(e) => setData({ ...data, Income: e.target.value })} value={data.Income} placeholder="Annual Income *" style={{ backgroundColor: "#111111", height: "62px" }} required />
         </div>
         <div className="col-5">
           <input type="file" name="IncomeCertificate" accept='application/pdf' className="form-control" onChange={(e) => setData({ ...data, IncomeCertificate: e.target.files[0] })} style={{ backgroundColor: "#111111", height: "62px" }} required />

@@ -1,33 +1,60 @@
-import React from 'react'
-import '../App.css';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import arrow from '../pages/istockphoto-944808858-170667a-removebg-preview.png'
+import '../App.css';
 
 function Front() {
-  return (
-    
-    <div className='screen'>
-        <div className='hostel-mate'>HOSTEL-MATE</div>
-        <div className='registration'><a></a>REGISTRATION</div>
-        {/* <div><a class="nav-link"  href="#"><Link to="/">home</Link></a>
-</div> */}
+  const [showMessage, setShowMessage] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
-        <div className='group-259 ellipse-109'></div>
-        <div className='ellipse-109'>
-         <Link to="/front"><img src={arrow} alt="" /></Link>
+  const handleModalOpen = () => setShowModal(true);
+  const handleModalClose = () => setShowModal(false);
+
+  return (
+    <div className="screen d-flex flex-column justify-content-center align-items-center text-light">
+      <div className="hostel-mate">HOSTEL-MATE</div>
+      <div className="transparent-box d-flex">
+        <div
+          className="layer black-layer d-flex justify-content-center align-items-center"
+          onMouseEnter={() => setShowMessage(true)}
+          onMouseLeave={() => setShowMessage(false)}
+        >
+          <Link to="/front">
+            <button className="custom-button white-button">REGISTRATION</button>
+          </Link>
+          {showMessage && (
+            <div className="message-box">
+              Students who want to apply for the college hostel can use the REGISTRATION link
+            </div>
+          )}
         </div>
-        {/* <div className='arrow'></div>  */}
-          <div className='group-260 ellipse-209'></div>
-        <div className='ellipse-209'>
-        <Link to="/login"><img src={arrow} alt="" /></Link>
+        <div className="layer white-layer d-flex justify-content-center align-items-center"
+          onMouseEnter={() => setShowLogin(true)}
+          onMouseLeave={() => setShowLogin(false)}>
+          <Link to="/login">
+            <button className="custom-button black-button">LOGIN</button>
+          </Link>
+          {showLogin && (
+            <div className="message-box">
+              Students who are allotted to the hostels can enter the website through LOGIN
+            </div>
+          )}
         </div>
-        <div className='login'>LOGIN</div>
-        <div className='bg'></div>
-      
-      
+      </div>
+      <p>Click here</p>
+      <button className="small-button" onClick={handleModalOpen}>To Know</button>
+      {showModal && (
+        <div className="modal-overlay" onClick={handleModalClose}>
+          <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <h2>Information</h2>
+            <p><strong>Registration:</strong> Students who want to apply for the college hostel can use the REGISTRATION link.</p>
+            <p><strong>Login:</strong> Students who are allotted to the hostels can enter the website through LOGIN.</p>
+            <button className="custom-button close-button" onClick={handleModalClose}>Close</button>
+          </div>
+        </div>
+      )}
     </div>
-  )
+  );
 }
 
-export default Front
-
+export default Front;
