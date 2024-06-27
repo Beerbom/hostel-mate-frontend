@@ -76,19 +76,19 @@ function MessBillCalculation() {
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="date">Date:</label>
-            <input type="date" id="date" name="date" value={formData.date} onChange={handleChange} className="form-control w-25" required />
+            <input type="date" id="date" name="date" value={formData.date} onChange={handleChange} className="form-control" required />
           </div>
           <div className="form-group">
             <label htmlFor="TotalEstablishmentcharge">Total Establishment Charge:</label>
-            <input type="number" id="TotalEstablishmentcharge" name="TotalEstablishmentcharge" value={formData.TotalEstablishmentcharge} onChange={handleChange} className="form-control w-25" required />
+            <input type="number" id="TotalEstablishmentcharge" name="TotalEstablishmentcharge" value={formData.TotalEstablishmentcharge} onChange={handleChange} className="form-control" required />
           </div>
           <div className="form-group">
             <label htmlFor="TotalFoodCharge">Total Food Charge:</label>
-            <input type="number" id="TotalFoodCharge" name="TotalFoodCharge" value={formData.TotalFoodCharge} onChange={handleChange} className="form-control w-25" required />
+            <input type="number" id="TotalFoodCharge" name="TotalFoodCharge" value={formData.TotalFoodCharge} onChange={handleChange} className="form-control" required />
           </div>
           <div className="form-group">
             <label htmlFor="Fine">Fine:</label>
-            <input type="number" id="Fine" name="Fine" value={formData.Fine} onChange={handleChange} className="form-control w-25" required />
+            <input type="number" id="Fine" name="Fine" value={formData.Fine} onChange={handleChange} className="form-control" required />
           </div>
           <button className='btn btn-warning mt-3 mx-4 align-items-center' style={{ color: '#ffffff' }} type="submit">
             {loading ? <Loader /> : 'Calculate and Save Mess Bill'}
@@ -98,8 +98,8 @@ function MessBillCalculation() {
         <h3>Latest Mess Bill</h3>
        
         {messBillData && (
-          <div>
-            <table className="table table-bordered table-striped table-lg mx-auto" style={{ width: '80%' }}>
+          <div className="table-responsive">
+            <table className="table table-bordered table-striped table-lg mx-auto">
               <thead>
                 <tr>
                   <th className="text-center">Date</th>
@@ -110,7 +110,6 @@ function MessBillCalculation() {
                   <th className="text-center">TotalAttendance</th>
                   <th className="text-center">TotalFine</th>
                   <th className="text-center">essCharge</th>
-                 
                 </tr>
               </thead>
               <tbody>
@@ -135,4 +134,3 @@ function MessBillCalculation() {
 }
 
 export default MessBillCalculation;
-

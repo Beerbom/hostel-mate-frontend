@@ -8,12 +8,13 @@ const Loader = () => (
     <span className="load"></span>
   </div>
 );
+
 function MessBillForm() {
   const [formData, setFormData] = useState({
     date: '',
     TotalEstablishmentcharge: 0,
     TotalFoodCharge: 0,
-    Fine:0,
+    Fine: 0,
   });
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
@@ -62,9 +63,10 @@ function MessBillForm() {
     setEditedMessBills(updatedMessBills);
   };
 
-    const handleAddFine = () => {
-        setIsEditing(!isEditing); // Toggle editing state
-      };
+  const handleAddFine = () => {
+    setIsEditing(!isEditing); // Toggle editing state
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -74,6 +76,7 @@ function MessBillForm() {
       setError(error.response?.data?.error || 'Failed to calculate and save mess bills');
     }
   };
+
   const handleConfirmUpdate = async () => {
     try {
       const response = await axios.post('/api/update-messbills', { messBills: editedMessBills });
@@ -94,23 +97,59 @@ function MessBillForm() {
         {loading ? (
           <Loader /> // Show loader component when loading is true
         ) : (
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="date">Date:</label>
-          <input type="text" style={{ border: "none", background: "none", outline: 'none', caretColor: 'transparent' }} id="date" name="date" value={formData.date} readOnly />
-
-          <label htmlFor="TotalEstablishmentcharge">Total Establishment Charge:</label>
-          <input type="text" style={{ border: "none", background: "none", caretColor: 'transparent', outline: 'none' }} id="TotalEstablishmentcharge" name="TotalEstablishmentcharge" value={formData.TotalEstablishmentcharge} readOnly />
-
-          <label htmlFor="TotalFoodCharge">Total Food Charge:</label>
-          <input type="text" style={{ border: "none", background: "none", outline: 'none', caretColor: 'transparent' }} id="TotalFoodCharge" name="TotalFoodCharge" value={formData.TotalFoodCharge} readOnly />
-
-          <label htmlFor="Fine">Fine:</label>
-          <input type="text" style={{ border: "none", background: "none", width: "50px", outline: 'none', caretColor: 'transparent' }} id="Fine" name="Fine" value={formData.Fine} readOnly />
-
-          <button type="submit" style={{ color: '#ffffff' }} className="btn btn-warning align-items-center mt-3">Generate Mess Bill</button>
-        </form>
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label htmlFor="date" className="form-label">Date:</label>
+              <input
+                type="text"
+                style={{ border: "none", background: "none", outline: 'none', caretColor: 'transparent' }}
+                id="date"
+                name="date"
+                value={formData.date}
+                readOnly
+                className="form-control-plaintext"
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="TotalEstablishmentcharge" className="form-label">Total Establishment Charge:</label>
+              <input
+                type="text"
+                style={{ border: "none", background: "none", caretColor: 'transparent', outline: 'none' }}
+                id="TotalEstablishmentcharge"
+                name="TotalEstablishmentcharge"
+                value={formData.TotalEstablishmentcharge}
+                readOnly
+                className="form-control-plaintext"
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="TotalFoodCharge" className="form-label">Total Food Charge:</label>
+              <input
+                type="text"
+                style={{ border: "none", background: "none", outline: 'none', caretColor: 'transparent' }}
+                id="TotalFoodCharge"
+                name="TotalFoodCharge"
+                value={formData.TotalFoodCharge}
+                readOnly
+                className="form-control-plaintext"
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="Fine" className="form-label">Fine:</label>
+              <input
+                type="text"
+                style={{ border: "none", background: "none", width: "50px", outline: 'none', caretColor: 'transparent' }}
+                id="Fine"
+                name="Fine"
+                value={formData.Fine}
+                readOnly
+                className="form-control-plaintext"
+              />
+            </div>
+            <button type="submit" style={{ color: '#ffffff' }} className="btn btn-warning align-items-center mt-3">Generate Mess Bill</button>
+          </form>
         )}
-        <div>
+        <div className="mt-4">
           <h5>Latest Mess Bill</h5>
           {loading ? (
             <p>Loading...</p>
@@ -118,57 +157,56 @@ function MessBillForm() {
             <p>Error: {error}</p>
           ) : latestMessBill ? (
             <div>
-                <button onClick={handleAddFine} className="btn btn-danger mb-3">
-          {isEditing ? 'Confirm' : 'Add Fine'} {/* Button text changes based on editing state */}
-        </button>
+              <button onClick={handleAddFine} className="btn btn-danger mb-3">
+                {isEditing ? 'Confirm' : 'Add Fine'} {/* Button text changes based on editing state */}
+              </button>
               <p className='text-center fs-4 fw-5'>Mess bill for the Month of: {latestMessBill.month}</p>
-              <table className="table table-bordered table-striped table-lg mx-auto" style={{ width: '80%' }}>
-                <thead>
-                  <tr>
-                    <th className="text-center">Room</th>
-                    <th className="text-center">Sl No</th>
-                    <th className="text-center">Name</th>
-
-                    <th className="text-center"> ADM NO</th>
-                    <th className="text-center"> Attendance</th>
-                    <th className="text-center"> Amount</th>
-                    <th className="text-center">Fine</th>
-                    <th className="text-center"> Total Amount</th>
-                    
-                  </tr>
-                </thead>
-                <tbody>
-
-                  {editedMessBills.map((bill, index) => (
-                    <tr key={index}>
-                      <td>{bill.Room_No}</td>
-                      <td> {index + 1}</td>
-                      <td>{bill.Name}</td>
-                      <td>{bill.AdmNo}</td>
-                      <td>{bill.TotalAttendance}</td>
-                      <td>{Math.round(bill.Amount)}</td>
-                      <td>
-                  {isEditing ? (
-                    <input
-                      type="number"
-                      value={bill.Fine}
-                      onChange={(e) => handleFineChange(index, e.target.value)}
-                    />
-                  ) : (
-                    bill.Fine // Show fine amount without input field when not editing
-                  )}
-                </td>
-                      <td>{Math.round(bill.TotalAmount)}</td>
+              <div className="table-responsive">
+                <table className="table table-bordered table-striped table-lg mx-auto">
+                  <thead>
+                    <tr>
+                      <th className="text-center">Room</th>
+                      <th className="text-center">Sl No</th>
+                      <th className="text-center">Name</th>
+                      <th className="text-center">ADM NO</th>
+                      <th className="text-center">Attendance</th>
+                      <th className="text-center">Amount</th>
+                      <th className="text-center">Fine</th>
+                      <th className="text-center">Total Amount</th>
                     </tr>
-                  ))}
-
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {editedMessBills.map((bill, index) => (
+                      <tr key={index}>
+                        <td>{bill.Room_No}</td>
+                        <td>{index + 1}</td>
+                        <td>{bill.Name}</td>
+                        <td>{bill.AdmNo}</td>
+                        <td>{bill.TotalAttendance}</td>
+                        <td>{Math.round(bill.Amount)}</td>
+                        <td>
+                          {isEditing ? (
+                            <input
+                              type="number"
+                              value={bill.Fine}
+                              onChange={(e) => handleFineChange(index, e.target.value)}
+                              className="form-control"
+                            />
+                          ) : (
+                            bill.Fine // Show fine amount without input field when not editing
+                          )}
+                        </td>
+                        <td>{Math.round(bill.TotalAmount)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
               {isEditing && (
-          <button onClick={handleConfirmUpdate} className="btn btn-success mt-3">
-            Confirm {/* Button to confirm and update database */}
-          </button>
-        )}
+                <button onClick={handleConfirmUpdate} className="btn btn-success mt-3">
+                  Confirm {/* Button to confirm and update database */}
+                </button>
+              )}
             </div>
           ) : (
             <p>No latest mess bill data found.</p>
