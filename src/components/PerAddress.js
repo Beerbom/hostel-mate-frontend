@@ -32,7 +32,7 @@ function PerAddress({data,setData}) {
     const calculateDistance = async () => {
       if (data.PPincode.length === 6) { // Assuming pincode length is 6
         try {
-          const response = await axios.post('http://localhost:5000/calculate', { pin: data.PPincode });
+          const response = await axios.post('/calculate', { pin: data.PPincode });
           console.log(response.data[0].distance.text);
           setData({ ...data, Distance: response.data[0].distance.text });
         } catch (error) {
