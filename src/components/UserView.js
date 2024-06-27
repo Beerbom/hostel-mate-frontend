@@ -10,7 +10,7 @@ const Loader = () => (
 );
 
 function UserView() {
-  const [allottedDetails, setAllottedDetails] = useState([]);
+  const [allottedDetails, setAllottedDetails] = useState();
   const [showDetailsIndex, setShowDetailsIndex] = useState(null);
   const [loading, setLoading] = useState(true); // Loading state for fetching data
   const [vacating, setVacating] = useState(false); // Loading state for vacating
