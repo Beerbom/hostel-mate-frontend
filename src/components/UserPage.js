@@ -15,7 +15,7 @@ const Loader = () => (
 const UserPage = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [messDutyData, setMessDutyData] = useState([]);
+  const [messDutyData, setMessDutyData] = useState();
   const [messBillData, setMessBillData] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [showPay, setShowPay] = useState(false);
