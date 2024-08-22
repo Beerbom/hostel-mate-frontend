@@ -17,7 +17,7 @@ import LhRules from './components/LhRules';
 import Contact from './components/Contact';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-
+// import statements
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 axios.defaults.baseURL='https://hostel-mate-backend.vercel.app';
 axios.defaults.withCredentials=true
